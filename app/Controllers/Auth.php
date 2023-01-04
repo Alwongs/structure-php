@@ -7,7 +7,7 @@ use App\Services\Router;
 class Auth
 {
 
-    public function auth() 
+    public function login($data) 
     {
         $email = $data["email"];
         $password = $data["password"];
@@ -20,8 +20,17 @@ class Auth
 
         if (password_verify($password, $user->password)) {
             session_start();
-            $_SESSION["user_id"] = $user->id;
-            $_SESSION["group"] = $user->group;
+            $_SESSION["user"] = [
+                "id" => $user->id,
+                "full_name" => $user->full_name,
+                "username" => $user->username,
+                "group" => $user->group,
+                "email" => $user->email,
+                "avatar" => $user->avatar
+            ];
+            Router::redirect('/profile');
+        } else {
+            die('Wrong password or email');
         }
     }
 

@@ -13,7 +13,7 @@
 
         <main class="main">
             <h2>Sign In</h2>
-            <form action="" class="form">
+            <form action="/auth/login" method="post" class="form">
                 <div class="form__element">
                     <input type="email" name="email" placeholder="email adress">
                 </div>
